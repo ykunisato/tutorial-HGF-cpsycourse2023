@@ -1,0 +1,16 @@
+{
+"image": "ghcr.io/ykunisato/hgf:1.8.5",
+"customizations": {
+	"vscode": {
+		"extensions": [
+			"ms-toolsai.jupyter",
+			"julialang.language-julia",
+			"cameronbieganek.julia-color-themes",
+			"0h7z.vscode-julia-format",
+			"colinfang.markdown-julia",
+			"yzhang.markdown-all-in-one",
+			"shd101wyy.markdown-preview-enhanced"
+		]
+	}
+}
+}
