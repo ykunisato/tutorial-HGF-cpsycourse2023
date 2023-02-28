@@ -90,7 +90,7 @@ $$
 なお、 $\chi$ は以下のように定義される。
 
 $$
-\chi \stackrel{\text { def }}{=}{\kappa, \omega, \ldots, \kappa_{n-1}, \omega_{n-1}, \vartheta}
+\chi \stackrel{\text { def }}{=}{\lbrace\kappa, \omega, \ldots, \kappa_{n-1}, \omega_{n-1}, \vartheta\rbrace}
 $$
 
 
@@ -103,15 +103,10 @@ $$
 
 
 $$
-\begin{aligned} \pi_{i}^{(k)}= & \widehat{\pi}_{i}^{(k)}+\frac{1}{2}\left(\kappa_{i-1} v_{i-1}^{(k)} \widehat{\pi}_{i-1}^{(k)}\right)^{2} \\ & \left(1+\left(1-\frac{1}{v_{i-1}^{(k)} \pi_{i-1}^{(k-1)}}\right) \delta_{i-1}^{(k)}\right)\end{aligned}
+\begin{aligned} \pi_{i}^{(k)}= & \widehat{\pi}_{i}^{(k)}+\frac{1}{2}\left(\kappa_{i-1} v_{i-1}^{(k)} \widehat{\pi}_{i-1}^{(k)}\right)^{2} \left(1+\left(1-\frac{1}{v_{i-1}^{(k)} \pi_{i-1}^{(k-1)}}\right) \delta_{i-1}^{(k)}\right)\end{aligned}
 $$
 
 定義は以下の通り（Mathys et al.(2014) Equation 11-14）。分散は精度の逆数である。入力の不規則な間隔は、Equation 11の $t^{(k)}$ によって完全に説明されることに注意が必要である。
-
-$$
-v_{i}^{(k)} \stackrel{\text { def }}{=}\left\{\begin{array}{c}t^{(k)} \exp \left(\kappa_{i} \mu_{i+1}^{(k-1)}+\omega_{i}\right), i=1, \ldots, n-1 \\ t^{(k)} \vartheta, \quad i=n\end{array}\right.
-$$
-
 
 $$
 \widehat{\mu}_{i}^{(k)} \stackrel{\text { def }}{=} \mu_{i}^{(k-1)}
@@ -127,6 +122,17 @@ $$
 \delta_{i}^{(k)} \stackrel{\mathrm{def}}{=} \frac{\sigma_{i}^{(k)}+\left(\mu_{i}^{(k)}-\widehat{\mu}_{i}^{(k)}\right)^{2}}{\sigma_{i}^{(k-1)}+v_{i}^{(k)}}-1
 $$
 
+iが1からn-1の場合
+
+$$
+v_{i}^{k} \stackrel{\text { def }}{=}\mathrm{t}^{(\mathrm{k})} \exp \left(\kappa_{i} \mu_{\mathrm{i}+1}^{(\mathrm{k}-1)}+\omega_{\mathrm{i}}\right)
+$$
+
+i=nの場合
+
+$$
+v_{i}^{k} \stackrel{\text { def }}{=}\mathrm{t}^{(\mathrm{k})} \vartheta
+$$
 
 Equation9と10は、第２レベル以上の場合であり、第１レベルでは以下を用いる(Mathys et al.(2014) Equation 15-16)。
 
@@ -171,7 +177,6 @@ $$
 
 上の式は、一般的な正規分布の確率密度関数 $\frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)$ を変分エネルギーIを用いて表現していると言える。変分エネルギーIの定義などは以下である（Mathys et al.(2014) Equation B3）。変分エネルギーIは、パラメータが互いに独立しているという仮定をおいた平均場近似で求める。q()とp()の距離が最小になるパラメータを求める。
 
-
 $$
 \begin{aligned}
 I\left(x_i^{(k)}\right) & =\int q\left(x_{\backslash i}^{(k)}\right) \ln p\left(x_i^{(k)}, x_{\backslash i}^{(k)}, \chi \mid \mu_1^{(1 \ldots k)}\right) \mathrm{d} x_{\backslash i}^{(k)}, \\
@@ -180,6 +185,7 @@ x_{\backslash i} & =\left\{x_j\right\}_{j \neq i}, \\
 \chi & =\left\{\kappa_i, \omega_i, \vartheta\right\}_{1<i<n} .
 \end{aligned}
 $$
+
 
 変分エネルギー内をさらに整理すると以下になる(Mathys et al.(2014) Equation B4)。
 
@@ -273,14 +279,15 @@ $$
 一般に，HGFでは観測とパラメータの同時確率分布は，以下のようになる(Mathys et al.(2014) Equation 19)。uは入力、yは反応（0か1）、 $\lambda$ はHGFの隠れ状態の十分統計量（平均と精度）、 $\chi$ はHGFのパラメータ、 $\zeta$ は隠れ状態が反応に反映される程度を調整するパラメータである。反応モデルは直接的に知覚モデルを利用するのではなく、推定によって間接的に知覚モデルを利用する。
 
 $$
-\begin{aligned} p\left(y, \chi, \lambda^{(0)}, \zeta \mid u\right)= & p\left(\chi, \lambda^{(0)}, \zeta\right) \\ & \prod_{k=1}^{K} p\left(y^{(k)} \mid \lambda^{(k)}\left(\chi, \lambda^{(0)}, u\right), \zeta\right)\end{aligned}
+\begin{aligned} p\left(y, \chi, \lambda^{(0)}, \zeta \mid u\right)= & p\left(\chi, \lambda^{(0)}, \zeta\right) \\
+ & \prod_{k=1}^{K} p\left(y^{(k)} \mid \lambda^{(k)}\left(\chi, \lambda^{(0)}, u\right), \zeta\right)\end{aligned}
 $$
 
 
 ここで、パラメータ $\xi$ の最大事後推定値(MAP)を求める。 $\xi$ の定義は以下である。
 
 $$
-\xi \stackrel{\text { def }}{=}{\chi, \lambda^{(0)}, \xi}
+\xi \stackrel{\text { def }}{=}{\chi, \lambda^{(0)}, \zeta}
 $$
 
 
@@ -293,7 +300,12 @@ $$
 Equation20は、以下のように展開できる（Mathys et al.(2014) Equation E1）。
 
 $$
-\begin{aligned} \xi^{*} & =\underset{\xi}{\arg \max } p(\xi \mid y, u)=\underset{\xi}{\arg \max } \frac{p(\xi, y \mid u)}{p(y)} \\ & =\underset{\xi}{\arg \max } p(\xi, y \mid u)=\underset{\xi}{\arg \max } \ln p(\xi, y \mid u) \\ & =\underset{\xi}{\arg \max } \ln (p(y \mid \xi, u) p(\xi)) \\ & =\underset{\xi}{\arg \max }(\ln p(y \mid \xi, u)+\ln p(\xi)) \\ & =\underset{\xi}{\arg \max }\left(\sum_{k} \ln p\left(y^{(k)} \mid \xi, u\right)+\ln p(\xi)\right) \\ & =\underset{\xi}{\arg \max }\left(\sum_{k} \ln p\left(y^{(k)} \mid \lambda^{(k)}\left(\chi, \lambda^{(0)}, u\right), \zeta\right)+\ln p(\xi)\right)\end{aligned}
+\begin{aligned} \xi^{*} & =\underset{\xi}{\arg \max } p(\xi \mid y, u)=\underset{\xi}{\arg \max } \frac{p(\xi, y \mid u)}{p(y)} \\ 
+& =\underset{\xi}{\arg \max } p(\xi, y \mid u)=\underset{\xi}{\arg \max } \ln p(\xi, y \mid u) \\ 
+& =\underset{\xi}{\arg \max } \ln (p(y \mid \xi, u) p(\xi)) \\ 
+& =\underset{\xi}{\arg \max }(\ln p(y \mid \xi, u)+\ln p(\xi)) \\ 
+& =\underset{\xi}{\arg \max }\left(\sum_{k} \ln p\left(y^{(k)} \mid \xi, u\right)+\ln p(\xi)\right) \\ 
+& =\underset{\xi}{\arg \max }\left(\sum_{k} \ln p\left(y^{(k)} \mid \lambda^{(k)}\left(\chi, \lambda^{(0)}, u\right), \zeta\right)+\ln p(\xi)\right)\end{aligned}
 $$
 
 以下のように扱いやすくなる（Mathys et al.(2014) Equation 21）。
@@ -306,7 +318,8 @@ $$
 
 
 $$
-\begin{aligned} Z(\xi \mid u, y) & \stackrel{\text { def }}{=} \ln p(\xi, y \mid u) \\ & =\sum_{k} \ln p\left(y^{(k)} \mid \lambda^{(k)}\left(\chi, \lambda^{(0)}, u\right), \zeta\right)+\ln p(\xi)\end{aligned}
+\begin{aligned} Z(\xi \mid u, y) & \stackrel{\text { def }}{=} \ln p(\xi, y \mid u) \\ 
+& =\sum_{k} \ln p\left(y^{(k)} \mid \lambda^{(k)}\left(\chi, \lambda^{(0)}, u\right), \zeta\right)+\ln p(\xi)\end{aligned}
 $$
 
 
